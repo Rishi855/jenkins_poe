@@ -9,6 +9,10 @@ pipeline {
         stage('Build and Push Image') {
             steps {
                 script {
+                    def dockerPath = "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+                    env.PATH = "${dockerPath};${env.PATH}"
+
+                    
                     // Build Docker image
                     docker.build("${DOCKER_IMAGE_NAME}", "-f Dockerfile .")
 
@@ -23,6 +27,9 @@ pipeline {
         stage('Pull and Run Image') {
             steps {
                 script {
+                    def dockerPath = "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+                    env.PATH = "${dockerPath};${env.PATH}"
+
                     // Pull Docker image on another system
                     docker.image("${DOCKER_IMAGE_NAME}").pull()
 
